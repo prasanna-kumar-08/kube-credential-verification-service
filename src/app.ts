@@ -1,8 +1,14 @@
 import express from 'express';
 import axios from 'axios';
-
+const cors = require('cors');
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+  origin: process.env.FE_URL || 'https://your-frontend-domain.onrender.com', // your React frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // allowed HTTP methods
+  credentials: true, // if you use cookies/auth headers
+}));
 
 const PORT = process.env.PORT || 3001; // Different port to issuance service
 const WORKER_ID = process.env.WORKER_ID || 'worker-1';
